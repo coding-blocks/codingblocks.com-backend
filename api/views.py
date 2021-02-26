@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from api.models import MiniBanner
+from api.models import Banner
 from api.serializer import BannerSerializer
 from rest_framework import generics
 
@@ -12,7 +12,7 @@ def index(request):
 #     return HttpResponse(data)
 
 class BannerList(generics.ListAPIView):
-    queryset = MiniBanner.objects.all()
+    queryset = Banner.objects.all()[:3]
     serializer_class = BannerSerializer
 
 

@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from api.models import MiniBanner
+from api.models import Banner
 
 class BannerSerializer(serializers.ModelSerializer):
   class Meta:
-    model = MiniBanner
-    fields = ['tag', 'img_url']
+    model = Banner
+    fields = ['tag', 'heading1', 'heading2', 'tagline', 'subText', 'cta', 'img_url', 'bg_color']
