@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 from django.utils.log import DEFAULT_LOGGING
+from decouple import config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'b&dsc@q#wgjzlfr$z=fvj#qwkgr9-k8x#w8le0jatgh1!%^x8s'
+SECRET_KEY = config('SECRET_KEY', default = 'b&dsc@q#wgjzlfr$z=fvj#qwkgr9-k8x#w8le0jatgh1!%^x8s')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -83,11 +84,10 @@ WSGI_APPLICATION = 'cbdb.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cbdb',
-        'USER': 'cbdb',
-        'PASSWORD': 'cbdb',
-        'HOST': '127.0.0.1',
-    }
+        'NAME': config('DB_NAME', default='cbdb'),
+        'USER': config('DB_USER', default='cbdb'),
+        'PASSWORD': config('DB_PASSWORD', default='cbdb'),
+        'HOST': config('DB_HOST', default='127.0.0.1'),    }
 }
 
 
