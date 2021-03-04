@@ -16,3 +16,12 @@ class Banner(models.Model):
     cta = models.CharField(max_length=200)
     bg_color = models.CharField(max_length=200)
 
+class SuccessStory(models.Model):
+    title = models.CharField(max_length=200)
+    subTitle = models.CharField(max_length=200)
+    body = models.CharField(max_length=500)
+    img = models.URLField()
+    company_logo = models.URLField()
+    company_name = models.CharField(max_length=200)
+    college = models.CharField(max_length=200)
+    course = models.CharField(max_length=200)
