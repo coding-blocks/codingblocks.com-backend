@@ -1,15 +1,11 @@
 from django.http import HttpResponse, Http404
-from api.models import Banner,MiniBanner,SuccessStory
-from api.serializer import BannerSerializer,MiniBannerSerializer,SuccessStorySerializer
+from api.models import *
+from api.serializer import *
 from rest_framework import generics
+from rest_framework.views import APIView
 
 def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
-
-# def banners(request):
-#     latest_banner = MiniBanner.objects.all()
-#     data = serializers.serialize('json', latest_banner)
-#     return HttpResponse(data)
 
 class BannerList(generics.ListAPIView):
     queryset = Banner.objects.all()[:3]
@@ -18,6 +14,23 @@ class BannerList(generics.ListAPIView):
 class SuccessStoryList(generics.ListAPIView):
     queryset = SuccessStory.objects.all()[:5]
     serializer_class = SuccessStorySerializer
+
+class MembersList(generics.ListAPIView):
+    queryset = Member.objects.all()
+    serializer_class = MemberSerializer    
+
+class PostQuery(generics.CreateAPIView):
+    queryset = Queries.objects.all()
+    serializer_class = QuerySerializer
+
+class Universe(APIView):
+    def get(self, request, format=None):
+        """
+        Return a list of all users.
+        """
+        usernames = [user.username for user in User.objects.all()]
+        return Response(usernames)
+
 class MiniBanner(generics.RetrieveAPIView):
     queryset = MiniBanner.objects.all()
     serializer_class = MiniBannerSerializer
