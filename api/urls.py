@@ -26,6 +26,8 @@ urlpatterns = [
     path('miniBanner',views.MiniBanner.as_view(),name='miniBanner'),
     path('successStories',views.SuccessStoryList.as_view(),name='successStories'),
     path('query',csrf_exempt(views.PostQuery.as_view()),name='query'),
-    path('members',views.MembersList.as_view(),name='members')
+    path('members',views.MembersList.as_view(),name='members'),
+    path('courses',views.CourseList.as_view(),name='courses'),
+    path('courses/<int:pk>',views.CourseRetrieveView.as_view(),name='course')
 
 ]

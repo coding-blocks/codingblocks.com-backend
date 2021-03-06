@@ -12,6 +12,7 @@ psycopg2-binary = "*"
 django-rest-framework = "*"
 django-cors-headers = "*"
 python-decouple = "*"
+django-filter = "*"
 
 [dev-packages]
 

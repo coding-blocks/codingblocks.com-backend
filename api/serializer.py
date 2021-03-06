@@ -24,4 +24,9 @@ class QuerySerializer(serializers.ModelSerializer):
 class MemberSerializer(serializers.ModelSerializer):
   class Meta:
     model = Member
-    fields = ['name', 'contact', 'img', 'description', 'designation']    
+    fields = ['name', 'contact', 'img', 'description', 'designation']   
+
+class CourseSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Course
+    fields = ['title', 'description', 'logo', 'theme', 'rating', 'number_ratings', 'video_link', 'languages', 'duration', 'slug']         

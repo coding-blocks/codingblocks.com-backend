@@ -19,6 +19,11 @@ class Banner(models.Model):
 class Company(models.Model):
     name = models.CharField(max_length=100,default='')
     logo = models.URLField(default='')
+
+    def __str__(self):
+        return self.name
+
+
 class SuccessStory(models.Model):
     title = models.CharField(max_length=200)
     subTitle = models.CharField(max_length=200)
@@ -35,6 +40,34 @@ class Queries(models.Model):
     description = models.CharField(max_length=1000)
     type = models.CharField(max_length=50)
 
+
+class Centre(models.Model):
+    choices= [
+        ('pitampura','Pitampura'),
+        ('noida','Noida'),
+        ('live','Live')
+    ]
+    name = models.CharField(
+        max_length=50,
+        choices=choices,
+        default='noida'
+    )
+
+    def __str__(self):
+        return self.name
+
+class Batch(models.Model):
+    buyLink = models.URLField()
+    enrollmentStartDate = models.DateField()
+    enrollmentStartDate = models.DateField()
+    enrollmentEndDate = models.DateField()
+    startDate = models.DateField()
+    endDate = models.DateField()
+    price = models.IntegerField()
+    Mrp = models.IntegerField()
+    course = models.ForeignKey("Course", on_delete=models.CASCADE)
+    centre = models.ForeignKey("Centre", on_delete=models.CASCADE)
+
 class Course(models.Model):
     theme_choices = [
         ('theme-blue', 'blue'),
@@ -46,8 +79,6 @@ class Course(models.Model):
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=10000)
     logo = models.URLField()
-    price = models.IntegerField()
-    mrp = models.IntegerField()
     theme =  models.CharField(
         max_length=200,
         choices=theme_choices,
@@ -56,13 +87,9 @@ class Course(models.Model):
     rating = models.IntegerField()
     number_ratings = models.IntegerField()
     slug = models.CharField(max_length=1000)
-    start_day = models.DateField()
-    registrations_open_day = models.DateField()
     video_link = models.URLField()
     languages = ArrayField(models.CharField(max_length=10, blank=True),size=2)
     duration = models.CharField(max_length=200)
-    buy_link = models.URLField()
-
 
 class Member(models.Model):
     name = models.CharField(max_length=100)

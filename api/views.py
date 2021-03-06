@@ -14,6 +14,12 @@ class BannerList(generics.ListAPIView):
 class SuccessStoryList(generics.ListAPIView):
     queryset = SuccessStory.objects.all()[:5]
     serializer_class = SuccessStorySerializer
+    
+class CourseList(generics.ListAPIView):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+    filterset_fields = ['title']
+  
 
 class MembersList(generics.ListAPIView):
     queryset = Member.objects.all()
@@ -40,5 +46,13 @@ class MiniBanner(generics.RetrieveAPIView):
             return self.get_queryset()[0]
         except:
             raise Http404
+
+class CourseRetrieveView(generics.RetrieveAPIView):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+
+
+
+
 
 
