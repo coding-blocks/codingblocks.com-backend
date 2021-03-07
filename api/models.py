@@ -59,12 +59,11 @@ class Centre(models.Model):
 class Batch(models.Model):
     buyLink = models.URLField()
     enrollmentStartDate = models.DateField()
-    enrollmentStartDate = models.DateField()
     enrollmentEndDate = models.DateField()
     startDate = models.DateField()
     endDate = models.DateField()
     price = models.IntegerField()
-    Mrp = models.IntegerField()
+    mrp = models.IntegerField()
     course = models.ForeignKey("Course", on_delete=models.CASCADE)
     centre = models.ForeignKey("Centre", on_delete=models.CASCADE)
 
@@ -75,6 +74,11 @@ class Course(models.Model):
         ('theme-orange', 'orange'),
         ('theme-pink', 'pink'),
         ('theme-purple', 'purple'),
+    ]
+    difficulty_choices = [
+        ('beginner', 'Beginner'),
+        ('intermediate', 'Intermediate'),
+        ('advanced', 'Advanced')
     ]
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=10000)
@@ -90,6 +94,11 @@ class Course(models.Model):
     video_link = models.URLField()
     languages = ArrayField(models.CharField(max_length=10, blank=True),size=2)
     duration = models.CharField(max_length=200)
+    difficulty = models.CharField(
+        max_length=200,
+        choices=difficulty_choices,
+        default='beginner'
+    )
 
 class Member(models.Model):
     name = models.CharField(max_length=100)

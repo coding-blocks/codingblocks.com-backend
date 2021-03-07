@@ -48,8 +48,10 @@ class MiniBanner(generics.RetrieveAPIView):
             raise Http404
 
 class CourseRetrieveView(generics.RetrieveAPIView):
-    queryset = Course.objects.all()
+    queryset = Course.objects.all().prefetch_related('batch_set')
     serializer_class = CourseSerializer
+    lookup_field = 'slug'
+
 
 
 
