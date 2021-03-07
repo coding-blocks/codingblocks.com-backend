@@ -16,6 +16,9 @@ class Banner(models.Model):
     cta = models.CharField(max_length=200)
     bg_color = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.heading1
+
 class Company(models.Model):
     name = models.CharField(max_length=100,default='')
     logo = models.URLField(default='')
@@ -67,6 +70,16 @@ class Batch(models.Model):
     course = models.ForeignKey("Course", on_delete=models.CASCADE)
     centre = models.ForeignKey("Centre", on_delete=models.CASCADE)
 
+class Member(models.Model):
+    name = models.CharField(max_length=100)
+    designation = models.CharField(max_length=100)
+    contact = models.EmailField(max_length=100)
+    img = models.URLField()
+    description = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return self.name
+
 class Course(models.Model):
     theme_choices = [
         ('theme-blue', 'blue'),
@@ -99,12 +112,10 @@ class Course(models.Model):
         choices=difficulty_choices,
         default='beginner'
     )
+    mentors = models.ManyToManyField(Member)
 
-class Member(models.Model):
-    name = models.CharField(max_length=100)
-    designation = models.CharField(max_length=100)
-    contact = models.EmailField(max_length=100)
-    img = models.URLField()
-    description = models.CharField(max_length=1000)
+    def __str__(self):
+        return self.title
+
 
 

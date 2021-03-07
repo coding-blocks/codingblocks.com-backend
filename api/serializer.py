@@ -34,14 +34,14 @@ class MemberSerializer(serializers.ModelSerializer):
 class BatchSerializer(serializers.ModelSerializer):
   class Meta:
     model = Batch
-    fields = ['Mrp', 'buyLink', 'enrollmentEndDate', 'startDate', 'endDate', 'price', 'centre']      
+    fields = ['mrp', 'buyLink', 'enrollmentEndDate', 'startDate', 'endDate', 'price', 'centre']      
 
 class CourseSerializer(serializers.ModelSerializer):
   batches = BatchSerializer(source='batch_set', many=True)
 
   class Meta:
     model = Course
-    fields = ['title', 'description', 'logo', 'theme', 'rating', 'number_ratings', 'video_link', 'languages', 'duration', 'slug', 'batches']
+    fields = ['title', 'description', 'logo', 'theme', 'rating', 'number_ratings', 'video_link', 'languages', 'duration', 'slug', 'difficulty','batches','mentors']
     lookup_field = 'slug'
     extra_kwargs = {
       'url': {'lookup_field': 'slug'}
