@@ -138,6 +138,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = (
+    Path(__file__).parent.parent / 'staticfiles'
+)
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
