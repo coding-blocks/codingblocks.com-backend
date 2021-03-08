@@ -31,13 +31,21 @@ class MemberSerializer(serializers.ModelSerializer):
     model = Member
     fields = ['name', 'contact', 'img', 'description', 'designation']   
 
+class CentreSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Centre
+    fields = ['name']
+
 class BatchSerializer(serializers.ModelSerializer):
+  centre = CentreSerializer()
+
   class Meta:
     model = Batch
     fields = ['mrp', 'buyLink', 'enrollmentEndDate', 'startDate', 'endDate', 'price', 'centre']      
 
 class CourseSerializer(serializers.ModelSerializer):
   batches = BatchSerializer(source='batch_set', many=True)
+  mentors = MemberSerializer(many=True)
 
   class Meta:
     model = Course

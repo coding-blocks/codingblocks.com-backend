@@ -3,6 +3,8 @@ from api.models import *
 from api.serializer import *
 from rest_framework import generics
 from rest_framework.views import APIView
+from django.db.models import Prefetch, Q
+
 
 def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
@@ -15,12 +17,6 @@ class SuccessStoryList(generics.ListAPIView):
     queryset = SuccessStory.objects.all()[:5]
     serializer_class = SuccessStorySerializer
     
-class CourseList(generics.ListAPIView):
-    queryset = Course.objects.all()
-    serializer_class = CourseSerializer
-    filterset_fields = ['title']
-  
-
 class MembersList(generics.ListAPIView):
     queryset = Member.objects.all()
     serializer_class = MemberSerializer    
@@ -47,8 +43,22 @@ class MiniBanner(generics.RetrieveAPIView):
         except:
             raise Http404
 
+class CourseList(generics.ListAPIView):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+    filterset_fields = ['title']
+
+    def get_queryset(self, *args, **kwargs): 
+        query = super().get_queryset(*args, **kwargs)
+
+        centres = self.request.query_params.get('centres', None)
+        if (centres):
+            query = query.filter(batch__centre__name__in = centres.split(',') ).distinct()
+
+        return query
+
 class CourseRetrieveView(generics.RetrieveAPIView):
-    queryset = Course.objects.all().prefetch_related('batch_set')
+    queryset = Course.objects.prefetch_related(Prefetch('batch_set')).all()
     serializer_class = CourseSerializer
     lookup_field = 'slug'
 
