@@ -7,6 +7,24 @@ class MiniBanner(models.Model):
     img_url = models.URLField(max_length=200)
 
 class Banner(models.Model):
+    bg_choices = [
+        ('blue-light', 'Blue Light'),
+        ('blue-dark', 'Blue Dark'),
+        ('blue', 'Blue'),
+        ('green-light', 'Green Light'),
+        ('green-dark', 'Green Dark'),
+        ('green', 'Green'),
+        ('orange-light', 'Orange Light'),
+        ('orange-dark', 'Orange Dark'),
+        ('orange', 'Orange'),
+        ('pink-light', 'Pink Light'),
+        ('pink-dark', 'Pink Dark'),
+        ('pink', 'Pink'),
+        ('purple-light', 'Purple Light'),
+        ('purple-dark', 'Purple Dark'),
+        ('purple', 'Purple')
+    ]
+
     tag = models.CharField(max_length=20)
     heading1 = models.CharField(max_length=200)
     heading2 = models.CharField(max_length=200)
@@ -14,7 +32,11 @@ class Banner(models.Model):
     subText = models.CharField(max_length=200)
     img_url = models.URLField(max_length=200)
     cta = models.CharField(max_length=200)
-    bg_color = models.CharField(max_length=200)
+    bg_color = models.CharField(
+        max_length=200
+        choices=bg_choices,
+        default='blue-light'
+    )
 
     def __str__(self):
         return self.heading1
