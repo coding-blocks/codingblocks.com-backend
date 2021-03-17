@@ -33,7 +33,7 @@ class Banner(models.Model):
     img_url = models.URLField(max_length=200)
     cta = models.CharField(max_length=200)
     bg_color = models.CharField(
-        max_length=200
+        max_length=200,
         choices=bg_choices,
         default='blue-light'
     )
