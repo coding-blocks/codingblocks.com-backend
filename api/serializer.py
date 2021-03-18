@@ -15,11 +15,16 @@ class MiniBannerSerializer(serializers.ModelSerializer):
   class Meta:
     model = MiniBanner
     fields = ['tag', 'img_url']
-
+    
 class SuccessStorySerializer(serializers.ModelSerializer):
   class Meta:
     model = SuccessStory
     fields = ['name', 'lpa', 'subTitle', 'body', 'img', 'college', 'course']
+class CompanySerializer(serializers.ModelSerializer):
+  success_story = SuccessStorySerializer()
+  class Meta:
+    model = Company
+    fields = ['name', 'logo', 'success_story']    
 
 class QuerySerializer(serializers.ModelSerializer):
   class Meta:
@@ -49,7 +54,7 @@ class CourseSerializer(serializers.ModelSerializer):
 
   class Meta:
     model = Course
-    fields = ['title', 'description', 'logo', 'theme', 'rating', 'number_ratings', 'video_link', 'languages', 'duration', 'slug', 'difficulty','batches','mentors']
+    fields = ['title', 'description', 'logo', 'theme', 'rating', 'number_ratings', 'video_link', 'languages', 'duration', 'slug', 'difficulty','batches','mentors','projects', 'syallabus',  'highlights']
     lookup_field = 'slug'
     extra_kwargs = {
       'url': {'lookup_field': 'slug'}

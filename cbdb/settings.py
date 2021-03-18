@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'django_filters',
-
+    'django_json_widget',
 ]
 
 MIDDLEWARE = [
@@ -166,6 +166,7 @@ STATIC_ROOT = (
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://codingblocks.xyz"
 ]
 
 REST_FRAMEWORK = {

@@ -57,7 +57,7 @@ class SuccessStory(models.Model):
     img = models.URLField()
     college = models.CharField(max_length=200)
     course = models.CharField(max_length=200)
-    company = models.ForeignKey("Company", on_delete=models.CASCADE,null=True)
+    company = models.ForeignKey("Company", on_delete=models.CASCADE,null=True, related_name='success_stories')
 
 class Queries(models.Model):
     name = models.CharField(max_length=100)
@@ -136,6 +136,9 @@ class Course(models.Model):
         default='beginner'
     )
     mentors = models.ManyToManyField(Member)
+    projects =  models.JSONField()
+    syallabus  = models.JSONField()
+    highlights = models.JSONField()
 
     def __str__(self):
         return self.title
