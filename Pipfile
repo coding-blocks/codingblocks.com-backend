@@ -13,6 +13,7 @@ django-rest-framework = "*"
 django-cors-headers = "*"
 python-decouple = "*"
 django-filter = "*"
+django-json-widget = "*"
 
 [dev-packages]
 
