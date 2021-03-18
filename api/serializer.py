@@ -19,7 +19,7 @@ class MiniBannerSerializer(serializers.ModelSerializer):
 class SuccessStorySerializer(serializers.ModelSerializer):
   class Meta:
     model = SuccessStory
-    fields = ['title', 'subTitle', 'body', 'img', 'college', 'course']
+    fields = ['name', 'lpa', 'subTitle', 'body', 'img', 'college', 'course']
 class CompanySerializer(serializers.ModelSerializer):
   success_story = SuccessStorySerializer()
   class Meta:

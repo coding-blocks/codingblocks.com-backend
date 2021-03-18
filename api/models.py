@@ -50,7 +50,8 @@ class Company(models.Model):
 
 
 class SuccessStory(models.Model):
-    title = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
+    lpa = models.IntegerField(default=0)
     subTitle = models.CharField(max_length=200)
     body = models.CharField(max_length=500)
     img = models.URLField()
