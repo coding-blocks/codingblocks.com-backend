@@ -23,7 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY', default = 'b&dsc@q#wgjzlfr$z=fvj#qwkgr9-k8x#w8le0jatgh1!%^x8s')
+SECRET_KEY = config(
+    'SECRET_KEY', default='b&dsc@q#wgjzlfr$z=fvj#qwkgr9-k8x#w8le0jatgh1!%^x8s')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
@@ -90,7 +91,7 @@ DATABASES = {
         'NAME': config('DB_NAME', default='cbdb'),
         'USER': config('DB_USER', default='cbdb'),
         'PASSWORD': config('DB_PASSWORD', default='cbdb'),
-        'HOST': config('DB_HOST', default='127.0.0.1'),    }
+        'HOST': config('DB_HOST', default='127.0.0.1'), }
 }
 
 
@@ -170,5 +171,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
+
 }

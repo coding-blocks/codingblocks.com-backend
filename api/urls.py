@@ -21,7 +21,6 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.index, name='index'),
     path('banner',views.BannerList.as_view(),name='banner'),
     path('miniBanner',views.MiniBanner.as_view(),name='miniBanner'),
     path('successStories',views.SuccessStoryList.as_view(),name='successStories'),
@@ -29,6 +28,4 @@ urlpatterns = [
     path('members',views.MembersList.as_view(),name='members'),
     path('courses',views.CourseList.as_view(),name='courses'),
     path('courses/<slug:slug>',views.CourseRetrieveView.as_view(),name='course')
-
-
 ]

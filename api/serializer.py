@@ -16,15 +16,16 @@ class MiniBannerSerializer(serializers.ModelSerializer):
     model = MiniBanner
     fields = ['tag', 'img_url']
     
-class SuccessStorySerializer(serializers.ModelSerializer):
-  class Meta:
-    model = SuccessStory
-    fields = ['name', 'lpa', 'subTitle', 'body', 'img', 'college', 'course']
 class CompanySerializer(serializers.ModelSerializer):
-  success_story = SuccessStorySerializer()
   class Meta:
     model = Company
-    fields = ['name', 'logo', 'success_story']    
+    fields = ['name', 'logo',] 
+
+class SuccessStorySerializer(serializers.ModelSerializer):
+  company = CompanySerializer()
+  class Meta:
+    model = SuccessStory
+    fields = ['name', 'lpa', 'subTitle', 'body', 'img', 'college', 'course', 'company']   
 
 class QuerySerializer(serializers.ModelSerializer):
   class Meta:

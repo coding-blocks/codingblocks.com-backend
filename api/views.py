@@ -6,9 +6,6 @@ from rest_framework.views import APIView
 from django.db.models import Prefetch, Q
 
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
-
 class BannerList(generics.ListAPIView):
     queryset = Banner.objects.all()[:3]
     serializer_class = BannerSerializer
