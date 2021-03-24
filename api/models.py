@@ -6,6 +6,9 @@ class MiniBanner(models.Model):
     tag = models.CharField(max_length=20)
     img_url = models.URLField(max_length=200)
 
+    def __str__(self):
+        return self.tag
+
 class Banner(models.Model):
     bg_choices = [
         ('blue-light', 'Blue Light'),
@@ -59,12 +62,18 @@ class SuccessStory(models.Model):
     course = models.CharField(max_length=200)
     company = models.ForeignKey("Company", on_delete=models.CASCADE,null=True, related_name='success_stories')
 
+    def __str__(self):
+        return self.name
+
 class Queries(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
     phoneNo = models.CharField(max_length=50)
     description = models.CharField(max_length=1000)
     type = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
 
 
 class Centre(models.Model):
@@ -92,6 +101,9 @@ class Batch(models.Model):
     mrp = models.IntegerField()
     course = models.ForeignKey("Course", on_delete=models.CASCADE)
     centre = models.ForeignKey("Centre", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.course + self.centre
 
 class Member(models.Model):
     name = models.CharField(max_length=100)
