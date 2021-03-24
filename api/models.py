@@ -103,7 +103,7 @@ class Batch(models.Model):
     centre = models.ForeignKey("Centre", on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.course + self.centre
+        return str(self.centre) + " - " + str(self.course)
 
 class Member(models.Model):
     name = models.CharField(max_length=100)
