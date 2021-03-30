@@ -136,7 +136,7 @@ class Course(models.Model):
         choices=theme_choices,
         default='theme-blue'
     )
-    rating = models.IntegerField()
+    rating = models.FloatField()
     number_ratings = models.IntegerField()
     slug = models.CharField(max_length=1000)
     video_link = models.URLField()
