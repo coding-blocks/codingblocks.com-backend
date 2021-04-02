@@ -59,7 +59,7 @@ class SuccessStory(models.Model):
     ]
     name = models.CharField(max_length=200)
     lpa = models.IntegerField(default=0)
-    subTitle = models.CharField(max_length=200)
+    subTitle = models.CharField(max_length=200, null=True, blank=True)
     body = models.CharField(max_length=500)
     img = models.URLField()
     college = models.CharField(max_length=200)
