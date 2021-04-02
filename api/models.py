@@ -53,7 +53,7 @@ class Company(models.Model):
 
 
 class SuccessStory(models.Model):
-    bg_choices = [
+    placement_choices = [
         ('I', 'Internship'),
         ('P', 'Placement')
     ]
@@ -65,7 +65,11 @@ class SuccessStory(models.Model):
     college = models.CharField(max_length=200)
     course = models.CharField(max_length=200)
     company = models.ForeignKey("Company", on_delete=models.CASCADE,null=True, related_name='success_stories')
-    type = models.CharField(max_length=100)
+    placementType = models.CharField(
+        max_length=20,
+        choices=placement_choices,
+        default='P'
+    )
 
     def __str__(self):
         return self.name
