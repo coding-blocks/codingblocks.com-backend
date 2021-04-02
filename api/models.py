@@ -53,6 +53,10 @@ class Company(models.Model):
 
 
 class SuccessStory(models.Model):
+    bg_choices = [
+        ('I', 'Internship'),
+        ('P', 'Placement')
+    ]
     name = models.CharField(max_length=200)
     lpa = models.IntegerField(default=0)
     subTitle = models.CharField(max_length=200)
@@ -61,6 +65,7 @@ class SuccessStory(models.Model):
     college = models.CharField(max_length=200)
     course = models.CharField(max_length=200)
     company = models.ForeignKey("Company", on_delete=models.CASCADE,null=True, related_name='success_stories')
+    type = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
@@ -70,7 +75,7 @@ class Queries(models.Model):
     email = models.EmailField(max_length=100)
     phoneNo = models.CharField(max_length=50)
     description = models.CharField(max_length=1000)
-    type = models.CharField(max_length=50)
+    type = models.CharField(max_length=20)
 
     def __str__(self):
         return self.name
