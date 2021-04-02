@@ -25,7 +25,7 @@ class SuccessStorySerializer(serializers.ModelSerializer):
   company = CompanySerializer()
   class Meta:
     model = SuccessStory
-    fields = ['name', 'lpa', 'subTitle', 'body', 'img', 'college', 'course', 'company']   
+    fields = ['name', 'lpa', 'subTitle', 'body', 'img', 'college', 'course', 'company', 'placementType']   
 
 class QuerySerializer(serializers.ModelSerializer):
   class Meta:
