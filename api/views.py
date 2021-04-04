@@ -65,10 +65,10 @@ class EventsList(generics.ListAPIView):
     serializer_class = EventsSerializer
     filterset_fields = ['title']
 
-# class EventRetrieveView(generics.RetrieveAPIView):
-#     queryset = Event.objects.prefetch_related(Prefetch('batch_set')).all()
-#     serializer_class = EventSerializer
-#     lookup_field = 'slug'
+class EventRetrieveView(generics.RetrieveAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventsSerializer
+    lookup_field = 'slug'
 
 
 

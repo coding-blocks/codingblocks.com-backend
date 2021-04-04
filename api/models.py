@@ -147,7 +147,7 @@ class Course(models.Model):
     )
     rating = models.FloatField()
     number_ratings = models.IntegerField()
-    slug = models.CharField(max_length=1000)
+    slug = models.CharField(max_length=1000, unique=True)
     video_link = models.URLField()
     languages = ArrayField(models.CharField(max_length=10, blank=True),size=2)
     duration = models.CharField(max_length=200)
@@ -183,7 +183,7 @@ class Event(models.Model):
         default='workshop'
     )
     title = models.CharField(max_length=500)
-    slug = models.CharField(max_length=1000)
+    slug = models.CharField(max_length=1000, unique=True)
     subject = models.CharField(max_length=1000)
     description = models.CharField(max_length=2500)
     registrationEndDate = models.DateField()
