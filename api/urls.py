@@ -23,6 +23,7 @@ from . import views
 urlpatterns = [
     path('banner',views.BannerList.as_view(),name='banner'),
     path('miniBanner',views.MiniBanner.as_view(),name='miniBanner'),
+    path('topStories',views.topStoriesList.as_view(),name='topStories'),
     path('successStories',views.SuccessStoryList.as_view(),name='successStories'),
     path('query',csrf_exempt(views.PostQuery.as_view()),name='query'),
     path('members',views.MembersList.as_view(),name='members'),

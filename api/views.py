@@ -10,8 +10,12 @@ class BannerList(generics.ListAPIView):
     queryset = Banner.objects.all()[:3]
     serializer_class = BannerSerializer
 
-class SuccessStoryList(generics.ListAPIView):
+
+class TopStoriesList(generics.ListAPIView):
     queryset = SuccessStory.objects.all()[:5]
+    serializer_class = SuccessStorySerializer
+class SuccessStoryList(generics.ListAPIView):
+    queryset = SuccessStory.objects.all()
     serializer_class = SuccessStorySerializer
     
 class MembersList(generics.ListAPIView):
