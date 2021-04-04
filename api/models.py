@@ -199,4 +199,6 @@ class Event(models.Model):
     num_questions = models.IntegerField()
     img_link = models.URLField()
 
+    def __str__(self):
+        return self.title
 
