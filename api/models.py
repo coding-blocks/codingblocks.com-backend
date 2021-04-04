@@ -165,16 +165,16 @@ class Course(models.Model):
         return self.title
 
 
-class Event(model.Model):
+class Event(models.Model):
     event_types = [
         ('workshop', 'Workshop'),
         ('contest', 'Contest'),
-        ('other', 'Other')
+        ('other', 'Other'),
     ]
     event_levels = [
-        ('beginner','Beginner') 
-        ('intermediate','Intermediate')
-        ('advanced','Advanced')
+        ('beginner','Beginner'), 
+        ('intermediate','Intermediate'),
+        ('advanced','Advanced'),
     ]
 
     eventType = models.CharField(

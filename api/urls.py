@@ -28,4 +28,6 @@ urlpatterns = [
     path('members',views.MembersList.as_view(),name='members'),
     path('courses',views.CourseList.as_view(),name='courses'),
     path('courses/<slug:slug>',views.CourseRetrieveView.as_view(),name='course')
+    path('events',views.EventList.as_view(), name='events'),
+    path('events/<slug:slug>',views.EventRetrieveView.as_view(),name='event')
 ]
