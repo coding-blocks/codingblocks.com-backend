@@ -10,6 +10,7 @@ admin.site.register(Centre)
 admin.site.register(Queries)
 admin.site.register(Company)
 admin.site.register(Member)
+admin.site.register(Event)
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):

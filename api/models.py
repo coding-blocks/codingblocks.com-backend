@@ -147,7 +147,7 @@ class Course(models.Model):
     )
     rating = models.FloatField()
     number_ratings = models.IntegerField()
-    slug = models.CharField(max_length=1000)
+    slug = models.CharField(max_length=1000, unique=True)
     video_link = models.URLField()
     languages = ArrayField(models.CharField(max_length=10, blank=True),size=2)
     duration = models.CharField(max_length=200)
@@ -165,4 +165,40 @@ class Course(models.Model):
         return self.title
 
 
+class Event(models.Model):
+    event_types = [
+        ('workshop', 'Workshop'),
+        ('contest', 'Contest'),
+        ('other', 'Other'),
+    ]
+    event_levels = [
+        ('beginner','Beginner'), 
+        ('intermediate','Intermediate'),
+        ('advanced','Advanced'),
+    ]
+
+    eventType = models.CharField(
+        max_length=100,
+        choices=event_types,
+        default='workshop'
+    )
+    title = models.CharField(max_length=500)
+    slug = models.CharField(max_length=1000, unique=True)
+    subject = models.CharField(max_length=1000)
+    description = models.CharField(max_length=2500)
+    registrationEndDate = models.DateField()
+    eventDate = models.DateField()
+    venue = models.CharField(max_length=200)
+    mentors = models.ManyToManyField(Member)
+    time = models.TimeField()
+    level = models.CharField(
+        max_length=200,
+        choices=event_levels,
+        default='beginner'
+    )
+    num_questions = models.IntegerField()
+    img_link = models.URLField()
+
+    def __str__(self):
+        return self.title
 

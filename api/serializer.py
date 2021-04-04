@@ -59,4 +59,15 @@ class CourseSerializer(serializers.ModelSerializer):
     lookup_field = 'slug'
     extra_kwargs = {
       'url': {'lookup_field': 'slug'}
+    }
+
+class EventsSerializer(serializers.ModelSerializer):
+  mentors = MemberSerializer(many=True)
+
+  class Meta:
+    model=Event
+    fields = ['eventType', 'title', 'slug', 'subject', 'description', 'registrationEndDate', 'eventDate', 'venue', 'mentors', 'time', 'level', 'num_questions', 'img_link']
+    lookup_field = 'slug'
+    extra_kwargs = {
+      'url': {'lookup_field': 'slug'}
     }    

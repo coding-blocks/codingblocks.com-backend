@@ -27,5 +27,7 @@ urlpatterns = [
     path('query',csrf_exempt(views.PostQuery.as_view()),name='query'),
     path('members',views.MembersList.as_view(),name='members'),
     path('courses',views.CourseList.as_view(),name='courses'),
-    path('courses/<slug:slug>',views.CourseRetrieveView.as_view(),name='course')
+    path('courses/<slug:slug>',views.CourseRetrieveView.as_view(),name='course'),
+    path('events',views.EventsList.as_view(), name='events'),
+    path('events/<slug:slug>',views.EventRetrieveView.as_view(),name='event')
 ]

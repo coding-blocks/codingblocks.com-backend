@@ -60,8 +60,15 @@ class CourseRetrieveView(generics.RetrieveAPIView):
     lookup_field = 'slug'
 
 
+class EventsList(generics.ListAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventsSerializer
+    filterset_fields = ['title']
 
-
+class EventRetrieveView(generics.RetrieveAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventsSerializer
+    lookup_field = 'slug'
 
 
 
