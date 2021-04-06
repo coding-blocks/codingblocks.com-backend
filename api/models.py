@@ -51,6 +51,9 @@ class Company(models.Model):
     def __str__(self):
         return self.name
 
+    def first_nine(self):
+        return self.success_stories.all()[:9]
+
 
 class SuccessStory(models.Model):
     placement_choices = [

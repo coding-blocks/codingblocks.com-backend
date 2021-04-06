@@ -14,25 +14,22 @@ class BannerList(generics.ListAPIView):
 class TopStoriesList(generics.ListAPIView):
     queryset = SuccessStory.objects.all()[:5]
     serializer_class = SuccessStorySerializer
+
+
 class SuccessStoryList(generics.ListAPIView):
     queryset = SuccessStory.objects.all()
     serializer_class = SuccessStorySerializer
-    
+
+
 class MembersList(generics.ListAPIView):
     queryset = Member.objects.all()
-    serializer_class = MemberSerializer    
+    serializer_class = MemberSerializer
+
 
 class PostQuery(generics.CreateAPIView):
     queryset = Queries.objects.all()
     serializer_class = QuerySerializer
 
-class Universe(APIView):
-    def get(self, request, format=None):
-        """
-        Return a list of all users.
-        """
-        usernames = [user.username for user in User.objects.all()]
-        return Response(usernames)
 
 class MiniBanner(generics.RetrieveAPIView):
     queryset = MiniBanner.objects.all()
@@ -44,19 +41,22 @@ class MiniBanner(generics.RetrieveAPIView):
         except:
             raise Http404
 
+
 class CourseList(generics.ListAPIView):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
     filterset_fields = ['title']
 
-    def get_queryset(self, *args, **kwargs): 
+    def get_queryset(self, *args, **kwargs):
         query = super().get_queryset(*args, **kwargs)
 
         centres = self.request.query_params.get('centres', None)
         if (centres):
-            query = query.filter(batch__centre__name__in = centres.split(',') ).distinct()
+            query = query.filter(
+                batch__centre__name__in=centres.split(',')).distinct()
 
         return query
+
 
 class CourseRetrieveView(generics.RetrieveAPIView):
     queryset = Course.objects.prefetch_related(Prefetch('batch_set')).all()
@@ -64,15 +64,28 @@ class CourseRetrieveView(generics.RetrieveAPIView):
     lookup_field = 'slug'
 
 
+class UniverseRetrieveView(generics.ListAPIView):
+    queryset = Company.objects.all()
+    serializer_class = UniverseSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        query = super().get_queryset(*args, **kwargs)
+
+        companies = ['Microsoft', 'Nagarro', 'Goldman']
+        if (companies):
+            query = query.filter(
+                name__in=companies)
+
+        return query
+
+
 class EventsList(generics.ListAPIView):
     queryset = Event.objects.all()
     serializer_class = EventsSerializer
     filterset_fields = ['title']
 
+
 class EventRetrieveView(generics.RetrieveAPIView):
     queryset = Event.objects.all()
     serializer_class = EventsSerializer
     lookup_field = 'slug'
-
-
-
