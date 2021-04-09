@@ -167,6 +167,13 @@ class Course(models.Model):
     def __str__(self):
         return self.title
 
+class User(models.Model):
+    name = models.CharField(max_length=100)
+    oneauthId = models.IntegerField()
+    email = models.EmailField(max_length=100) 
+
+    def __str__(self):
+        return self.name
 
 class Event(models.Model):
     event_types = [
@@ -201,6 +208,8 @@ class Event(models.Model):
     )
     num_questions = models.IntegerField()
     img_link = models.URLField()
+    registration = models.ManyToManyField(User, blank=True, null=True)
+
 
     def __str__(self):
         return self.title

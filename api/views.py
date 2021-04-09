@@ -4,6 +4,7 @@ from api.serializer import *
 from rest_framework import generics
 from rest_framework.views import APIView
 from django.db.models import Prefetch, Q
+import datetime
 
 
 class BannerList(generics.ListAPIView):
@@ -59,7 +60,7 @@ class CourseList(generics.ListAPIView):
 
 
 class CourseRetrieveView(generics.RetrieveAPIView):
-    queryset = Course.objects.prefetch_related(Prefetch('batch_set')).all()
+    queryset = Course.objects.prefetch_related(Prefetch('batch_set')).filter(batch__startDate__lte=datetime.date.today(), batch__enrollmentEndDate__gte=datetime.date.today()).all()
     serializer_class = CourseSerializer
     lookup_field = 'slug'
 
@@ -80,7 +81,7 @@ class UniverseRetrieveView(generics.ListAPIView):
 
 
 class EventsList(generics.ListAPIView):
-    queryset = Event.objects.all()
+    queryset = Event.objects.filter(eventDate__gte=datetime.date.today()).all()
     serializer_class = EventsSerializer
     filterset_fields = ['title']
 
