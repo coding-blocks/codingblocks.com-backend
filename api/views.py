@@ -44,7 +44,7 @@ class MiniBanner(generics.RetrieveAPIView):
 
 
 class CourseList(generics.ListAPIView):
-    queryset = Course.objects.all()
+    queryset = Course.objects.prefetch_related(Prefetch('batch_set')).filter(batch__enrollmentEndDate__gte=datetime.date.today()).all()
     serializer_class = CourseSerializer
     filterset_fields = ['title']
 
@@ -60,7 +60,7 @@ class CourseList(generics.ListAPIView):
 
 
 class CourseRetrieveView(generics.RetrieveAPIView):
-    queryset = Course.objects.prefetch_related(Prefetch('batch_set')).filter(batch__startDate__lte=datetime.date.today(), batch__enrollmentEndDate__gte=datetime.date.today()).all()
+    queryset = Course.objects.prefetch_related(Prefetch('batch_set')).filter(batch__enrollmentEndDate__gte=datetime.date.today()).all()
     serializer_class = CourseSerializer
     lookup_field = 'slug'
 
