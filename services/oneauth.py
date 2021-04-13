@@ -35,5 +35,5 @@ def get_oneauth_service() -> OneauthService:
     url="https://account.codingblocks.com",
     client_id=2387689957,
     client_secret="S3xu7DdHj3R4IESHLER0mWULDGc1vCaSnfATZrRDTSzeMR8zeMBsIq7E9CyljzX3",
-    redirect_uri="https://test.codingblocks.com/events/callback"
+    redirect_uri="http://localhost:3000/events/callback"
   )

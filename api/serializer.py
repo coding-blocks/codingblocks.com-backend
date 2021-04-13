@@ -91,21 +91,14 @@ class CourseSerializer(serializers.ModelSerializer):
 
 class EventsSerializer(serializers.ModelSerializer):
     mentors = MemberSerializer(many=True)
-    user_count = serializers.SerializerMethodField()
-
     class Meta:
         model = Event
         fields = ['id','eventType', 'title', 'slug', 'subject', 'description', 'registrationEndDate',
-                  'eventDate', 'venue', 'mentors', 'time', 'level', 'num_questions', 'img_link','user_count']
+                  'eventDate', 'venue', 'mentors', 'time', 'level', 'num_questions', 'img_link']
         lookup_field = 'slug'
         extra_kwargs = {
             'url': {'lookup_field': 'slug'}
         }
-
-    def get_user_count(self, obj):
-        user_count = User.objects.count()
-        return user_count
-
 class EventCallbackSerializer(serializers.Serializer):
     event = serializers.CharField(required=True)
     code = serializers.CharField(required=True) 
