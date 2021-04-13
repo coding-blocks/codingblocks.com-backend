@@ -167,7 +167,9 @@ STATIC_ROOT = (
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "https://codingblocks.xyz"
+    "https://codingblocks.xyz",
+    "https://test.codingblocks.com"
+
 ]
 
 REST_FRAMEWORK = {
