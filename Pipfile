@@ -14,6 +14,7 @@ django-cors-headers = "*"
 python-decouple = "*"
 django-filter = "*"
 django-json-widget = "*"
+requests = "*"
 
 [dev-packages]
 

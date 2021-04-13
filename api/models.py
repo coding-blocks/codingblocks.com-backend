@@ -168,12 +168,13 @@ class Course(models.Model):
         return self.title
 
 class User(models.Model):
-    name = models.CharField(max_length=100)
-    oneauthId = models.IntegerField()
-    email = models.EmailField(max_length=100) 
+    oneauthId = models.IntegerField(primary_key=True)
+    user = models.JSONField() 
+    event = models.ForeignKey("Event", on_delete=models.CASCADE,null=False)
+
 
     def __str__(self):
-        return self.name
+        return self.user.name
 
 class Event(models.Model):
     event_types = [
@@ -193,7 +194,7 @@ class Event(models.Model):
         default='workshop'
     )
     title = models.CharField(max_length=500)
-    slug = models.CharField(max_length=1000, unique=True)
+    slug = models.SlugField(max_length=1000, unique=True)
     subject = models.CharField(max_length=1000)
     description = models.CharField(max_length=2500)
     registrationEndDate = models.DateField()
@@ -208,8 +209,6 @@ class Event(models.Model):
     )
     num_questions = models.IntegerField()
     img_link = models.URLField()
-    registration = models.ManyToManyField(User, blank=True, null=True)
-
 
     def __str__(self):
         return self.title

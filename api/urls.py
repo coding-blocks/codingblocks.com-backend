@@ -30,6 +30,7 @@ urlpatterns = [
     path('courses',views.CourseList.as_view(),name='courses'),
     path('courses/<slug:slug>',views.CourseRetrieveView.as_view(),name='course'),
     path('events',views.EventsList.as_view(), name='events'),
+    path('events_callback', views.EventsCallbakcView.as_view(), name='events_callback'),
     path('events/<slug:slug>',views.EventRetrieveView.as_view(),name='event'),
     path('universe',views.UniverseRetrieveView.as_view(),name='universe')
 

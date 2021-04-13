@@ -1,10 +1,15 @@
 from django.http import HttpResponse, Http404
 from api.models import *
 from api.serializer import *
+from services.oneauth import get_oneauth_service
 from rest_framework import generics
+from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.db.models import Prefetch, Q
 import datetime
+import requests
+import json
+
 
 
 class BannerList(generics.ListAPIView):
@@ -44,7 +49,8 @@ class MiniBanner(generics.RetrieveAPIView):
 
 
 class CourseList(generics.ListAPIView):
-    queryset = Course.objects.prefetch_related(Prefetch('batch_set')).filter(batch__enrollmentEndDate__gte=datetime.date.today()).all()
+    queryset = Course.objects.prefetch_related(Prefetch('batch_set')).filter(
+        batch__enrollmentEndDate__gte=datetime.date.today()).all()
     serializer_class = CourseSerializer
     filterset_fields = ['title']
 
@@ -60,7 +66,8 @@ class CourseList(generics.ListAPIView):
 
 
 class CourseRetrieveView(generics.RetrieveAPIView):
-    queryset = Course.objects.prefetch_related(Prefetch('batch_set')).filter(batch__enrollmentEndDate__gte=datetime.date.today()).all()
+    queryset = Course.objects.prefetch_related(Prefetch('batch_set')).filter(
+        batch__enrollmentEndDate__gte=datetime.date.today()).all()
     serializer_class = CourseSerializer
     lookup_field = 'slug'
 
@@ -90,3 +97,30 @@ class EventRetrieveView(generics.RetrieveAPIView):
     queryset = Event.objects.all()
     serializer_class = EventsSerializer
     lookup_field = 'slug'
+
+
+class EventsCallbakcView(APIView):
+    
+    def post(self, request, format=None):
+        try:
+            serializer = EventCallbackSerializer(data=request.data)
+            if serializer.is_valid() :
+                code = serializer.data['code']
+                events_slug = serializer.data['event']
+                event = Event.objects.get(slug=events_slug)
+
+                oneauth_service = get_oneauth_service()
+                user = oneauth_service.exchange_grant_with_user(code)
+                body = json.loads(user.content)
+                serializer = UserSerializer(data={'oneauthId': body['id'], 'user': body, 'event': event.id})
+                if serializer.is_valid() :
+                    serializer.save()
+                else : 
+                    print(serializer.errors)    
+                return Response(user)
+            print(serializer.errors)
+            return Response({"a": "a"})
+        except Exception as e:
+            print(e)
+            return Response({"error": str(e)})
+        
