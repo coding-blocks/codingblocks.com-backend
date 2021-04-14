@@ -1,6 +1,6 @@
 import requests
 from urllib.parse import urljoin
-from utils.config import get_config
+from utils.config import Config
 
 class OneauthService:
   _url: str
@@ -8,16 +8,15 @@ class OneauthService:
   _client_secret: str
   _redirect_uri: str
 
-  def __init__(self, url: str, client_id: str, client_secret: str, redirect_uri: str):
+  def __init__(self, url: str, client_id: str, client_secret: str):
     self._url = url
     self._client_id = client_id
     self._client_secret = client_secret
-    self._redirect_uri = redirect_uri
 
-  def exchange_grant_with_user(self, grant_code: str):
+  def exchange_grant_with_user(self, grant_code: str, redirect_uri: str):
     payload = {
       "client_id" : self._client_id,
-      "redirect_uri" : self._redirect_uri,
+      "redirect_uri" : redirect_uri,
       "client_secret" : self._client_secret,
       "grant_type" : "authorization_code",
       "code"  : grant_code
@@ -33,8 +32,7 @@ class OneauthService:
 
 def get_oneauth_service() -> OneauthService:
   return OneauthService(
-    url="https://account.codingblocks.com",
-    client_id=2387689957,
-    client_secret="S3xu7DdHj3R4IESHLER0mWULDGc1vCaSnfATZrRDTSzeMR8zeMBsIq7E9CyljzX3",
-    redirect_uri="https://test.codingblocks.com/events/callback"
+    url=Config.ONEAUTH_URL,
+    client_id=Config.ONEAUTH_CLIENT_ID,
+    client_secret=Config.ONEAUTH_CLIENT_SECRET,
   )
