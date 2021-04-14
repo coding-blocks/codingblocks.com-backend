@@ -13,7 +13,7 @@ import json
 
 
 class BannerList(generics.ListAPIView):
-    queryset = Banner.objects.all()[:3]
+    queryset = Banner.objects.all()
     serializer_class = BannerSerializer
 
 
