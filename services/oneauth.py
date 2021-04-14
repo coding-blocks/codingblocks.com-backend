@@ -33,8 +33,8 @@ class OneauthService:
 
 def get_oneauth_service() -> OneauthService:
   return OneauthService(
-    url=get_config().url,
-    client_id=get_config().client_id,
-    client_secret=get_config.client_secret,
-    redirect_uri=get_config.redirect_uri
+    url=get_config().ONEAUTH_URL,
+    client_id=get_config().ONEAUTH_CLIENT_ID,
+    client_secret=get_config().ONEAUTH_CLIENT_SECRET,
+    redirect_uri=get_config().ONEAUTH_REDIRECT_URI
   )
