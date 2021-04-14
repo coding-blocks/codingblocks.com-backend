@@ -167,14 +167,11 @@ class Course(models.Model):
     def __str__(self):
         return self.title
 
-class User(models.Model):
+class EventRegistration(models.Model):
     oneauthId = models.IntegerField(primary_key=True)
     user = models.JSONField() 
     event = models.ForeignKey("Event", on_delete=models.CASCADE,null=False)
 
-
-    def __str__(self):
-        return self.user.name
 
 class Event(models.Model):
     event_types = [
@@ -210,6 +207,11 @@ class Event(models.Model):
     num_questions = models.IntegerField()
     img_link = models.URLField()
 
+
     def __str__(self):
         return self.title
+
+    @property
+    def registration_count(self):
+        return self.eventregistration_set.count()
 

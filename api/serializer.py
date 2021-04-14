@@ -91,21 +91,23 @@ class CourseSerializer(serializers.ModelSerializer):
 
 class EventsSerializer(serializers.ModelSerializer):
     mentors = MemberSerializer(many=True)
+
     class Meta:
         model = Event
         fields = ['id','eventType', 'title', 'slug', 'subject', 'description', 'registrationEndDate',
-                  'eventDate', 'venue', 'mentors', 'time', 'level', 'num_questions', 'img_link']
+                  'eventDate', 'venue', 'mentors', 'time', 'level', 'num_questions', 'img_link','registration_count']
         lookup_field = 'slug'
         extra_kwargs = {
             'url': {'lookup_field': 'slug'}
         }
+
 class EventCallbackSerializer(serializers.Serializer):
     event = serializers.CharField(required=True)
     code = serializers.CharField(required=True) 
 
-class UserSerializer(serializers.ModelSerializer):
+class EventRegistrationSerializer(serializers.ModelSerializer):
         
     class Meta:
-        model = User
+        model = EventRegistration
         fields = ['oneauthId', 'user', 'event']
      

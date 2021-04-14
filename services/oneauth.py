@@ -1,5 +1,6 @@
 import requests
 from urllib.parse import urljoin
+from utils.config import get_config
 
 class OneauthService:
   _url: str
@@ -32,8 +33,8 @@ class OneauthService:
 
 def get_oneauth_service() -> OneauthService:
   return OneauthService(
-    url="https://account.codingblocks.com",
-    client_id=2387689957,
-    client_secret="S3xu7DdHj3R4IESHLER0mWULDGc1vCaSnfATZrRDTSzeMR8zeMBsIq7E9CyljzX3",
-    redirect_uri="http://localhost:3000/events/callback"
+    url=get_config().url,
+    client_id=get_config().client_id,
+    client_secret=get_config.client_secret,
+    redirect_uri=get_config.redirect_uri
   )

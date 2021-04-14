@@ -32,6 +32,7 @@ urlpatterns = [
     path('events',views.EventsList.as_view(), name='events'),
     path('events_callback', views.EventsCallbakcView.as_view(), name='events_callback'),
     path('events/<slug:slug>',views.EventRetrieveView.as_view(),name='event'),
+    path('registration_status',views.EventStatusView.as_view(),name='status'),
     path('universe',views.UniverseRetrieveView.as_view(),name='universe')
 
 ]

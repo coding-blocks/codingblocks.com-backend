@@ -98,6 +98,22 @@ class EventRetrieveView(generics.RetrieveAPIView):
     serializer_class = EventsSerializer
     lookup_field = 'slug'
 
+class EventStatusView(APIView):
+
+    def get(self, request, format=None):
+        try:
+            code = self.request.query_params.get('code', None)
+            events_slug = self.request.query_params.get('slug', None)
+            event = Event.objects.get(slug=events_slug)      
+            isRegistered = EventRegistration.objects.get(event = event.id, oneauthId= code)
+            if(isRegistered):
+                content = {'isRegistered': True}
+            else:
+                content = {'isRegistered': False}
+            return Response(content)
+        except Exception as e:
+            return Response({'isRegistered': False})
+
 
 class EventsCallbakcView(APIView):
     
@@ -112,7 +128,7 @@ class EventsCallbakcView(APIView):
                 oneauth_service = get_oneauth_service()
                 user = oneauth_service.exchange_grant_with_user(code)
                 body = json.loads(user.content)
-                serializer = UserSerializer(data={'oneauthId': body['id'], 'user': body, 'event': event.id})
+                serializer = EventRegistrationSerializer(data={'oneauthId': body['id'], 'user': body, 'event': event.id})
                 if serializer.is_valid() :
                     serializer.save()
                 else : 
