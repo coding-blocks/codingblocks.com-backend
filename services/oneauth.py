@@ -33,8 +33,8 @@ class OneauthService:
 
 def get_oneauth_service() -> OneauthService:
   return OneauthService(
-    url=get_config().ONEAUTH_URL,
-    client_id=get_config().ONEAUTH_CLIENT_ID,
-    client_secret=get_config().ONEAUTH_CLIENT_SECRET,
-    redirect_uri=get_config().ONEAUTH_REDIRECT_URI
+    url="https://account.codingblocks.com",
+    client_id=2387689957,
+    client_secret="S3xu7DdHj3R4IESHLER0mWULDGc1vCaSnfATZrRDTSzeMR8zeMBsIq7E9CyljzX3",
+    redirect_uri="https://test.codingblocks.com/events/callback"
   )
