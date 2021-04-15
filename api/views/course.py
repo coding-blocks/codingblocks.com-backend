@@ -19,7 +19,7 @@ class CourseList(generics.ListAPIView):
 
     @method_decorator(cache_page(60*60))
     def dispatch(self, *args, **kwargs):
-        return super.dispatch(*args, **kwargs)  
+        return super().dispatch(*args, **kwargs)  
 
     def get_queryset(self, *args, **kwargs):
         query = super().get_queryset(*args, **kwargs)

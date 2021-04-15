@@ -18,7 +18,7 @@ class EventsList(generics.ListAPIView):
 
     @method_decorator(cache_page(60*60))
     def dispatch(self, *args, **kwargs):
-        return super.dispatch(*args, **kwargs) 
+        return super().dispatch(*args, **kwargs) 
 
     queryset = Event.objects.filter(eventDate__gte=datetime.date.today()).all()
     serializer_class = EventsSerializer

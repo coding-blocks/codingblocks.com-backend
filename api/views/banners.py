@@ -16,7 +16,7 @@ class BannerList(generics.ListAPIView):
 
     @method_decorator(cache_page(60*60))
     def dispatch(self, *args, **kwargs):
-        return super.dispatch(*args, **kwargs) 
+        return super().dispatch(*args, **kwargs) 
 
     queryset = Banner.objects.all()
     serializer_class = BannerSerializer
@@ -27,7 +27,7 @@ class MiniBanner(generics.RetrieveAPIView):
 
     @method_decorator(cache_page(60*60))
     def dispatch(self, *args, **kwargs):
-        return super.dispatch(*args, **kwargs) 
+        return super().dispatch(*args, **kwargs) 
 
 
     def get_object(self):

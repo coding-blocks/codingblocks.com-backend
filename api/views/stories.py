@@ -16,7 +16,7 @@ class TopStoriesList(generics.ListAPIView):
 
     @method_decorator(cache_page(60*60))
     def dispatch(self, *args, **kwargs):
-        return super.dispatch(*args, **kwargs) 
+        return super().dispatch(*args, **kwargs) 
 
     queryset = SuccessStory.objects.all()[:5]
     serializer_class = SuccessStorySerializer
