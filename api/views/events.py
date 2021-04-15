@@ -11,8 +11,15 @@ from urllib.parse import urljoin
 import datetime
 import requests
 import json
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 class EventsList(generics.ListAPIView):
+
+    @method_decorator(cache_page(60*60))
+    def dispatch(self, *args, **kwargs):
+        return super.dispatch(*args, **kwargs) 
+
     queryset = Event.objects.filter(eventDate__gte=datetime.date.today()).all()
     serializer_class = EventsSerializer
     filterset_fields = ['title']

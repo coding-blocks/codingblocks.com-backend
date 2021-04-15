@@ -9,11 +9,17 @@ from django.db.models import Prefetch, Q
 import datetime
 import requests
 import json
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 class CourseList(generics.ListAPIView):
     queryset = Course.objects.prefetch_related(Prefetch('batch_set')).all()
     serializer_class = CourseSerializer
     filterset_fields = ['title']
+
+    @method_decorator(cache_page(60*60))
+    def dispatch(self, *args, **kwargs):
+        return super.dispatch(*args, **kwargs)  
 
     def get_queryset(self, *args, **kwargs):
         query = super().get_queryset(*args, **kwargs)
@@ -24,6 +30,8 @@ class CourseList(generics.ListAPIView):
                 batch__centre__name__in=centres.split(',')).distinct()
 
         return query
+
+  
 
 
 class CourseRetrieveView(generics.RetrieveAPIView):
