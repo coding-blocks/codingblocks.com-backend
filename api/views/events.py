@@ -53,11 +53,8 @@ class EventsCallbackView(APIView):
             user = oneauth_service.exchange_grant_with_user(code, urljoin(Config.PUBLIC_URL, 'events/callback'))
             body = json.loads(user.content)
             serializer = EventRegistrationSerializer(data={'oneauthId': body['id'], 'user': body, 'event': event.id})
-            if serializer.is_valid() :
-                serializer.save()
-            else : 
-                print(serializer.errors)    
+            if serializer.is_valid(raise_exception=True) :
+                serializer.save()  
             return Response(user)
-        print(serializer.errors)
-        return Response({"a": "a"})
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
         
