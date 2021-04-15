@@ -10,15 +10,15 @@ import datetime
 import requests
 import json
 
+
 class CourseList(generics.ListAPIView):
-    queryset = Course.objects.prefetch_related(Prefetch('batch_set')).filter(
-        batch__enrollmentEndDate__gte=datetime.date.today()).all()
+    queryset = Course.objects.prefetch_related().all()
     serializer_class = CourseSerializer
     filterset_fields = ['title']
 
     def get_queryset(self, *args, **kwargs):
         query = super().get_queryset(*args, **kwargs)
-
+        query = query.filter(batch__enrollmentEndDate__gte=datetime.date.today())
         centres = self.request.query_params.get('centres', None)
         if (centres):
             query = query.filter(
@@ -28,7 +28,7 @@ class CourseList(generics.ListAPIView):
 
 
 class CourseRetrieveView(generics.RetrieveAPIView):
-    queryset = Course.objects.prefetch_related(Prefetch('batch_set')).filter(
-        batch__enrollmentEndDate__gte=datetime.date.today()).all()
+    queryset = Course.objects.prefetch_related(Prefetch(
+        'batch_set', queryset=Batch.objects.filter(enrollmentEndDate__gte=datetime.date.today()))).all()
     serializer_class = CourseSerializer
     lookup_field = 'slug'
