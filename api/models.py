@@ -124,7 +124,7 @@ class Member(models.Model):
     contact = models.EmailField(max_length=100)
     img = models.URLField()
     description = models.CharField(max_length=1000)
-    highlights = models.JSONfield(blank=True, null=True)
+    highlights = models.JSONField(blank=True, null=True)
 
 
     def __str__(self):
