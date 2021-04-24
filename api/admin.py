@@ -9,7 +9,6 @@ admin.site.register(Batch)
 admin.site.register(Centre)
 admin.site.register(Queries)
 admin.site.register(Company)
-admin.site.register(Member)
 admin.site.register(Event)
 
 @admin.register(Course)
@@ -19,4 +18,8 @@ class CourseAdmin(admin.ModelAdmin):
         models.JSONField: {'widget': JSONEditorWidget},
     }
 
-
+@admin.register(Member)
+class MemberAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        models.JSONField: {'widget': JSONEditorWidget},
+    }

@@ -124,6 +124,8 @@ class Member(models.Model):
     contact = models.EmailField(max_length=100)
     img = models.URLField()
     description = models.CharField(max_length=1000)
+    highlights = models.JSONField(blank=True, null=True)
+
 
     def __str__(self):
         return self.name
@@ -164,6 +166,8 @@ class Course(models.Model):
     projects =  models.JSONField()
     syallabus  = models.JSONField()
     highlights = models.JSONField()
+    faqs = models.JSONField(blank=True, null=True)
+    syllabus_link = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.title
